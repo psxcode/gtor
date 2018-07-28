@@ -1,13 +1,17 @@
+import { Tree } from '../types'
+
 const visitTreeSeqSync = <T> (
   visitor: (arg: T, indices: number[]) => void
-) => (arr: (T | T[])[]) => {
-  const visit = (arr: (T | T[])[], inds: number[]) => {
-    const value = arr[inds[inds.length - 1]]
-    Array.isArray(value)
-      ? visit(value, [...inds, 0])
-      : visitor(value, inds.slice())
+) => (arr: Tree<T>) => {
+  const visit = (arr: Tree<T>, inds: number[]) => {
+    for (let i = 0; i < arr.length; ++i) {
+      const value = arr[i]
+      Array.isArray(value)
+        ? visit(value, [...inds, i])
+        : visitor(value, [...inds, i])
+    }
   }
-  visit(arr, [0])
+  visit(arr, [])
 }
 
 export default visitTreeSeqSync

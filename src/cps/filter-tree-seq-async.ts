@@ -1,9 +1,8 @@
 import { Tree } from '../types'
 
 const filterTreeSeqAsync = <T> (
-  pred: (arg: T, indices: number[], done: (arg: boolean) => void) => void,
-  done: (arg: Tree<T>) => void
-) => (arr: Tree<T>) => {
+  pred: (arg: T, indices: number[], done: (arg: boolean) => void) => void
+) => (arr: Tree<T>, done: (arg: Tree<T>) => void) => {
   const filterArray = (arr: Tree<T>, inds: number[], done: (arg: Tree<T>) => void) => {
     const res = [] as Tree<T>
     const filterValue = (i: number) => {

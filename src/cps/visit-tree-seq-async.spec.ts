@@ -15,7 +15,7 @@ const makespy = <T> () => {
   const spy = (val: T, inds: number[], done: () => void) => {
     values.push(val)
     indices.push(inds)
-    defer(done)
+    defer(done)(10)
   }
 
   (spy as Spy<T>).values = values;
@@ -28,12 +28,12 @@ describe('[ visitTreeSeqAsync ]', () => {
   it('should work', (done) => {
     const tree: Tree<number> = [1, 2, 3, [4, 5, [6, 7], 8], 9]
     const spy = makespy()
-    visitTreeSeqAsync(spy, () => {
+    visitTreeSeqAsync(spy)(tree, () => {
       expect(spy.values).deep.eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
       expect(spy.indices).deep.eq(
         [[0], [1], [2], [3, 0], [3, 1], [3, 2, 0], [3, 2, 1], [3, 3], [4]]
       )
       done()
-    })(tree)
+    })
   })
 })

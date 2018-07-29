@@ -1,9 +1,8 @@
 import { Tree } from '../types'
 
 const visitTreeSeqAsync = <T> (
-  visitor: (arg: T, indices: number[], done: () => void) => void,
-  done: () => void
-) => (arr: Tree<T>) => {
+  visitor: (arg: T, indices: number[], done: () => void) => void
+) => (arr: Tree<T>, done: () => void) => {
   const visitArray = (arr: Tree<T>, inds: number[], done: () => void) => {
     const visitValue = (i: number) => {
       const value = arr[i]

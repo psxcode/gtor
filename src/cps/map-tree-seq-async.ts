@@ -1,9 +1,8 @@
 import { Tree } from '../types'
 
 const mapTreeSeqAsync = <A, B> (
-  xf: (arg: A, indices: number[], done: (arg: B) => void) => void,
-  done: (arg: Tree<B>) => void
-) => (arr: Tree<A>) => {
+  xf: (arg: A, indices: number[], done: (arg: B) => void) => void
+) => (arr: Tree<A>, done: (arg: Tree<B>) => void) => {
   const mapArray = (arr: Tree<A>, inds: number[], done: (arg: Tree<B>) => void) => {
     const res = new Array(arr.length) as Tree<B>
     const mapValue = (i: number) => {

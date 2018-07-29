@@ -1,5 +1,3 @@
-import defer from '../utils/defer'
-
 const mapArraySeqAsync = <A, B> (
   xf: (arg: A, i: number, done: (arg: B) => void) => void,
   done: (arr: B[]) => void) =>
@@ -9,11 +7,11 @@ const mapArraySeqAsync = <A, B> (
       xf(arr[index], index, (res) => {
         resArr[index] = res
         index >= arr.length - 1
-          ? defer(done, resArr)
-          : defer(visitNext, index + 1)
+          ? done(resArr)
+          : visitNext(index + 1)
       })
     }
-    defer(visitNext, 0)
+    visitNext(0)
   }
 
-  export default mapArraySeqAsync
+export default mapArraySeqAsync

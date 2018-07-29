@@ -1,5 +1,6 @@
 import { expect } from 'chai'
 import mapTreeSeqSync from './map-tree-seq-sync'
+import { Tree } from '../types'
 
 type Spy<A, B> = {
   (val: A, inds: number[]): B
@@ -23,12 +24,11 @@ const makespy = <A, B> (xf: (arg: A, inds: number[]) => B) => {
   return spy as Spy<A, B>
 }
 
-
 const mult2 = (arg: number) => arg * 2
 
 describe('[ mapTreeSeqSync ]', () => {
   it('should work', () => {
-    const tree = [1, 2, 3, [4, 5, [6, 7], 8], 9]
+    const tree: Tree<number> = [1, 2, 3, [4, 5, [6, 7], 8], 9]
     const spy = makespy(mult2)
     const res = mapTreeSeqSync(spy)(tree)
     expect(spy.values).deep.eq([1, 2, 3, 4, 5, 6, 7, 8, 9])

@@ -1,7 +1,6 @@
 const filterArrayParAsync = <T> (
-  pred: (arg: T, index: number, done: (res: boolean) => void) => void,
-  done: (res: T[]) => void
-) => (arr: T[]) => {
+  pred: (arg: T, index: number, done: (res: boolean) => void) => void
+) => (arr: T[], done: (res: T[]) => void) => {
   let numDone = 0
   const result = new Array<T>(arr.length)
   const visitNext = (i: number) => {

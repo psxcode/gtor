@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import visitTreeSeqSync from './visit-tree-seq-sync'
 
-type Spy <T> = {
+type Spy<T> = {
   (val: T, inds: number[]): void
   values: T[]
   indices: number[][]
